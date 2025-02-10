@@ -39,7 +39,7 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 60,),
+            SizedBox(height: 20,),
             Text(
               'Congratulations!',
               style: TextStyle(
