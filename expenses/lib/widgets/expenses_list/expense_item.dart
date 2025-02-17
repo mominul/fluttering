@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:expenses/models/expense.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem(this.expense, {super.key});
@@ -17,7 +18,7 @@ class ExpenseItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(expense.title),
+            Text(expense.title, style: GoogleFonts.lato(fontWeight: FontWeight.bold),),
             const SizedBox(height: 4),
             Row(
               children: [

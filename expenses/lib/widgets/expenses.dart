@@ -4,6 +4,7 @@ import 'package:expenses/widgets/new_expense.dart';
 import 'package:expenses/widgets/expenses_list/expenses_list.dart';
 import 'package:expenses/models/expense.dart';
 import 'package:expenses/widgets/chart/chart.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -38,6 +39,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       isScrollControlled: true,
       builder: (ctx) => NewExpense(onExpenseAdded: _setExpense),
@@ -67,17 +69,20 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-    Widget expensesContent = Center(child: 
-      const Text('No expenses added yet. Add some!')
-    );
+    final width = MediaQuery.of(context).size.width;
+    final isLandscape = width > 600;
+
+    Widget expensesContent =
+        Center(child: const Text('No expenses added yet. Add some!'));
 
     if (_registeredExpenses.isNotEmpty) {
-      expensesContent = ExpensesList(expenses: _registeredExpenses, onExpenseDeleted: _removeExpense);
+      expensesContent = ExpensesList(
+          expenses: _registeredExpenses, onExpenseDeleted: _removeExpense);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter ExpenseTracker'),
+        title: Text('Expense Tracker', style: GoogleFonts.lato()),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
@@ -85,14 +90,25 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: expensesContent,
-          ),
-        ],
-      ),
+      body: !isLandscape
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: expensesContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+                Expanded(
+                  child: expensesContent,
+                ),
+              ],
+            ),
     );
   }
 }
