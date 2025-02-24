@@ -27,27 +27,45 @@ class MealDetailsScreen extends ConsumerWidget {
           title: Text(meal.title),
           actions: [
             IconButton(
-              icon: Icon(isFav ? Icons.star : Icons.star_border),
-              onPressed: () {
-                final exists = ref.read(favoriteMealsProvider.notifier).toggleFavMeal(meal);
+                icon: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: Icon(
+                    isFav ? Icons.star : Icons.star_border,
+                    key: ValueKey(isFav),
+                  ),
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(
+                      scale: animation,
+                      child: child,
+                    );
+                  },
+                ),
+                onPressed: () {
+                  final exists = ref
+                      .read(favoriteMealsProvider.notifier)
+                      .toggleFavMeal(meal);
 
-                if(exists) {
-                  showMessage('Removed \'${meal.title}\' from favorites!', context);
-                } else {
-                  showMessage('Added \'${meal.title}\' to favorites!', context);
-                }
-              }
-            ),
+                  if (exists) {
+                    showMessage(
+                        'Removed \'${meal.title}\' from favorites!', context);
+                  } else {
+                    showMessage(
+                        'Added \'${meal.title}\' to favorites!', context);
+                  }
+                }),
           ],
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.network(
-                meal.imageUrl,
-                height: 300,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              Hero(
+                tag: meal.id,
+                child: Image.network(
+                  meal.imageUrl,
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
