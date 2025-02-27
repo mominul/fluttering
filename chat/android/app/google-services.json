@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "89273292758",
+    "firebase_url": "https://flutter-data-backend-default-rtdb.firebaseio.com",
+    "project_id": "flutter-data-backend",
+    "storage_bucket": "flutter-data-backend.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89273292758:android:0dd26e5cda63382d9f3677",
+        "android_client_info": {
+          "package_name": "com.example.chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqwPFt2Tig_71SfEFmfBBTX4gFazMcglo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
